@@ -163,6 +163,9 @@
                   </div>
                   <% if current_user%>
                   <% Project.all.each do |project|%>
+                  <% if !project.enabled  && current_user.role == "Guest"%>
+                    <% next %>
+                  <% end %>
                   <div class="panel-heading sidebar_menu <%= main_collapse_class(project.id) %>">
                     <h4 class="panel-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= project.id %>" dataurl="" ><%= project.name %><i class="fa fa-caret-down"></i>

@@ -23,6 +23,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :enabled, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-7">
+      <%= f.check_box :enabled %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <%= f.fields_for :attachments do |task| %>
       <%= render "attachment_fields", f: task %>
     <% end %>
