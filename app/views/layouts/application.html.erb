@@ -41,6 +41,7 @@
       <div class="container" style="margin: -20px 0 0 0;">
         <a href="<%= root_path %>"><img src="<%= asset_path('top.png') %>" ></a>
       </div>
+
       <div class="container rounded_corners navbar-default navbar-static-top" style="background-color:#5cacee;">
         <div class="container">
           <div class="navbar-collapse collapse navbar-responsive-collapse">
@@ -50,7 +51,7 @@
                 <li class="dropdown main_dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>My Account</b> <i class="fa fa-caret-down"></i></a>
                   <ul class="dropdown-menu dropdown-mainmenu">
-                    <% if current_user && current_user.role == "Admin"%>
+                    <% if current_user.role == "Admin"%>
                       <li><%= link_to "Manage Users", manage_users_path  %></li>
                     <% end %>
                     <li> <%= link_to "Change Password", edit_user_registration_path  %></li>
@@ -58,8 +59,10 @@
                   </ul>
                 </li>
               <% else %>
-                <li><%= link_to "Login", new_user_session_path  %></li>
-                <li><%= link_to "Register", new_user_registration_path  %></li>         
+                <% if !@sub_project %>
+                  <li><%= link_to "Login", new_user_session_path  %></li>
+                <% end %>
+                <!-- <li><%= link_to "Register", new_user_registration_path  %></li>          -->
               <% end %>
             </ul>
             <% if @sub_project and @sub_project.id.present? %>
@@ -161,10 +164,9 @@
                   <div class="panel-heading sidebar_menu">
                     <%= link_to "About TGP", tgp_path, target: "_blank" %>
                   </div>
-                  <% if current_user%>
                   <% Project.all.each do |project|%>
-                  <% if !project.enabled  && current_user.role == "Guest"%>
-                    <% next %>
+                  <% if !project.enabled  %>
+                    <% next if !current_user %> 
                   <% end %>
                   <div class="panel-heading sidebar_menu <%= main_collapse_class(project.id) %>">
                     <h4 class="panel-title">
@@ -206,7 +208,6 @@
                       </ul>
                     </div>
                   </div>
-                  <% end %>
                   <% end %>
                   <div class="panel-heading sidebar_menu">
                     <%= link_to "Origin & History of  T.G.P", tgp_path(link: "origin"), target: "_blank"%>

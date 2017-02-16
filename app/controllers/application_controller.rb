@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-  	unless current_user
-      flash[:error] = "You must be logged in to access this page"
-      redirect_to new_user_session_url
-      return false
-    end
+  	# unless current_user
+   #    flash[:error] = "You must be logged in to access this page"
+   #    redirect_to new_user_session_url
+   #    return false
+   #  end
   end
 end
