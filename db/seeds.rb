@@ -15,6 +15,15 @@ def import_coordinates(sp, xls)
     spreadsheet = open_spreadsheet(xls_file)
     (4..spreadsheet.last_row).each do |i|
     	row = spreadsheet.row(i)
+      begin
+        if row[0].to_s.split('.').last.size > 3
+          row[0] = row[0].to_s
+        else
+          row[0] = ('%.3f' % row[0]).to_s
+        end
+      rescue
+        row[0] = row[0].to_s
+      end
     	sp.coordinates.create(title: row[0], east_utm: row[1], north_utm: row[2], lattitude: row[3], longitude: row[4], description: row[5], )
     end
   else

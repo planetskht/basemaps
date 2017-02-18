@@ -15,7 +15,15 @@ class Coordinate < ActiveRecord::Base
       row = spreadsheet.row(i)
       if row[0] != nil && row[1] != nil && row[2] != nil && row[3] != nil && row[4] != nil
         coordinate = new(sub_project: sub_project)
-        coordinate.title = row[0].to_s
+        begin
+          if row[0].to_s.split('.').last.size > 3
+            coordinate.title = row[0].to_s
+          else
+            coordinate.title = ('%.3f' % row[0]).to_s
+          end
+        rescue
+          coordinate.title = row[0].to_s
+        end
         coordinate.east_utm = row[1]
         coordinate.north_utm = row[2]
         coordinate.lattitude = row[3]
@@ -28,7 +36,6 @@ class Coordinate < ActiveRecord::Base
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      puts column_names
       csv << column_names
       all.each do |product|
         csv << product.attributes.values_at(*column_names)

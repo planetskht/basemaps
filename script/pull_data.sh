@@ -24,3 +24,4 @@ cd ..
 
 cd ..
 cd basemaps
+git pull
