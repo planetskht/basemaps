@@ -2,13 +2,13 @@
   <!-- Default panel contents -->
   <div class="panel-heading">
     <div style="display: inline">
-      <span class="h3">Village Coordinates of <%= @sub_project.name %>
+      <span class="h3">Global Coordinates of <%= @sub_project.name %>
       </span>
 
       <span class="right">
         <% if current_user && current_user.role != "Guest"%>
           <%= link_to new_project_sub_project_coordinate_path(@project, @sub_project)  do %>
-              <i class="fa fa-plus"> Add Village Coordinates</i>
+              <i class="fa fa-plus"> Add Global Coordinates</i>
           <% end %>
         <% end %>
         &nbsp;
@@ -36,7 +36,7 @@
       <thead>
       <tr>
         <%model_class = Coordinate%>
-        <th>Village</th>
+        <th>Chainage</th>
         <th><%= model_class.human_attribute_name(:east_utm) %></th>
         <th><%= model_class.human_attribute_name(:north_utm) %></th>
         <th><%= model_class.human_attribute_name(:lattitude) %></th>

@@ -9,7 +9,7 @@ class CoordinatesController < ApplicationController
     @coordinates = @sub_project.coordinates.order('created_at asc')
     respond_to do |format|
       format.html
-      format.csv { send_data @products.to_csv }
+      format.csv { send_data @coordinates.to_csv }
       format.xls
     end
   end

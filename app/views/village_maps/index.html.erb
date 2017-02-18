@@ -2,7 +2,11 @@
   <!-- Default panel contents -->
   <div class="panel-heading">
     <div style="display: inline">
-      <span class="h3">Village Maps of <%= @sub_project.name %>
+      <% if params[:map_type] == "Village Map" %>
+        <span class="h3">Village Maps of <%= @sub_project.name %>
+      <% else %>
+        <span class="h3">Village Wise Allignments of <%= @sub_project.name %>
+      <% end %>
       </span>
       <span class="right">
         <% if current_user && current_user.role != "Guest"%>
