@@ -80,7 +80,8 @@ def import_kmwise(sp, row, f1, f2, f3)
 end
 
 def import_structures(sp, row, f1, f2, f3, f4)
-  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: nil)
+  structure_label = row[5].present? ? row[5] : nil
+  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: nil, structure_label: structure_label)
   sd.save!
 
   sd.attachments.create(attach_type: "Digitised Copy", attachment: f1) if f1
@@ -197,7 +198,7 @@ sub_proj4 = ["SSG Canal Basemap from Km. 0.000 to Km. 5.435_10.000", "Basemap fr
 # Flash file for sub projects
 flash_sp1 = ["120.800-142.swf", "120.800-142.swf", "TGP MAIN CANAL.swf"]
 flash_sp2 = ["TGP MAIN CANAL.swf"]
-flash_sp3 = ["TGP MAIN CANAL.swf"]
+flash_sp3 = ["KR Dam main image.jpg"]
 flash_sp4 = ["TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf",
 			"TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf",
 			"TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf",

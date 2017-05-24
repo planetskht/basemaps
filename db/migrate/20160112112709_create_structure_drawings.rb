@@ -6,6 +6,7 @@ class CreateStructureDrawings < ActiveRecord::Migration
       t.references :sub_project, index: true, foreign_key: true
       t.string :type
       t.string :structure_type
+      t.string :structure_label
       t.timestamps null: false
     end
   end

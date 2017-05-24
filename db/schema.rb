@@ -124,8 +124,9 @@ ActiveRecord::Schema.define(version: 20170207155038) do
     t.integer  "sub_project_id"
     t.string   "type"
     t.string   "structure_type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "structure_label"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "structure_drawings", ["sub_project_id"], name: "index_structure_drawings_on_sub_project_id", using: :btree
