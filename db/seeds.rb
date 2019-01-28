@@ -237,11 +237,15 @@ coord_sp4 = ["no_file.xls", "points RR 10.xls", "points RR 30.xls",
 			"V4 Final 142.000 TO 151.837 COORDINATES.xls", "0.000 to 27.660.xls", "no_file.xls"]
 coord_sp5 = ["VILLAGE BOUNDRY CO-ORDINATES.xlsx"]
 
+if ENV["seed_project_number"].to_i > 0
+  projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]
+end
 projects.each_with_index do |p, index|
   project = Project.find_or_create_by(name: p, description: p)
   project.save!
   if File.exist?(@data_url + "#{project.folder_name}")
     path = @data_url + "#{project.folder_name}"
+    import_project_data(project, path)
     import_project_data(project, path)
   else
     puts "#{p} folder not exist"
