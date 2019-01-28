@@ -241,6 +241,9 @@ if ENV["seed_project_number"].to_i > 0
   projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]
 end
 projects.each_with_index do |p, index|
+  if ENV["seed_project_number"].to_i > 0
+    index = ENV["seed_project_number"].to_i if ENV["seed_project_number"]
+  end
   project = Project.find_or_create_by(name: p, description: p)
   project.save!
   if File.exist?(@data_url + "#{project.folder_name}")
