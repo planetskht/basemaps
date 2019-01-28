@@ -15,20 +15,36 @@ def import_coordinates(sp, xls)
     spreadsheet = open_spreadsheet(xls_file)
     (4..spreadsheet.last_row).each do |i|
     	row = spreadsheet.row(i)
-      begin
-        if row[0].to_s.split('.').last.size > 3
+      # only for HNSS-Phase-1
+      if sp.folder_name == "HNSS-Phase-1" 
+        row = import_hnss_p1(row)
+      else
+        begin
+          if row[0].to_s.split('.').last.size > 3
+            row[0] = row[0].to_s
+          else
+            row[0] = ('%.3f' % row[0]).to_s
+          end
+        rescue
           row[0] = row[0].to_s
-        else
-          row[0] = ('%.3f' % row[0]).to_s
         end
-      rescue
-        row[0] = row[0].to_s
       end
     	sp.coordinates.create(title: row[0], east_utm: row[1], north_utm: row[2], lattitude: row[3], longitude: row[4], description: row[5], )
     end
   else
     puts "#{xls} file not exist"
   end
+end
+
+def import_hnss_p1(row)
+  r = []
+  r[0] = row[2]
+  r[1] = row[3]
+  r[2] = row[4]
+  r[3] = row[5]
+  r[4] = row[6]
+  r[5] = row[1]
+  return r
 end
 
 def self.open_spreadsheet(file)
@@ -184,7 +200,12 @@ end
 
 
 # Projects
-projects = ["TGP NANDYAL", "SKFF Canal Basemap from Km 0.000 to Km 45.125", "Kandaleru Reservoir Basemap", "SSG Canal Basemap from Km. 0.000 to Km. 151.837"]
+projects = ["TGP NANDYAL",
+            "SKFF Canal Basemap from Km 0.000 to Km 45.125",
+            "Kandaleru Reservoir Basemap",
+            "SSG Canal Basemap from Km. 0.000 to Km. 151.837",
+            "Handri-Neeva Sujala Sravanthi"
+           ]
 
 # Sub Projects
 sub_proj1 = ["Srisailam Right Side Main Canal", "TGP Link Canal-VBR", "TGP Main Canal"]
@@ -194,6 +215,7 @@ sub_proj4 = ["SSG Canal Basemap from Km. 0.000 to Km. 5.435_10.000", "Basemap fr
 			"Basemap from Km 45.000 to Km 47.100", "Basemap from Km 47.100 to Km 67.500", "Basemap from Km 67.500 to Km 82.500",
 			"Basemap from Km 82.500 to Km 112.000", "Basemap from Km 112.000 to Km 120.800", "Basemap from Km 120.800 to Km 142.000",
 			"Basemap from Km 142.000 to Km 151.837", "7th Branch Canal Basemap from KM 0.000 TO KM 27.666", "7A AYACUT BASEMAP"]
+sub_proj5 = ["HNSS Phase 1"]
 
 # Flash file for sub projects
 flash_sp1 = ["120.800-142.swf", "120.800-142.swf", "TGP MAIN CANAL.swf"]
@@ -203,6 +225,7 @@ flash_sp4 = ["TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf",
 			"TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf",
 			"TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf",
 			"TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf", "TGP MAIN CANAL.swf"]
+flash_sp5 = []
 
 # Coordinates for sub projects
 coord_sp1 = ["SRBC COORDINATES CANAL & STRUCTURES.xls", "LINK CANAL COORDINATES.xls", "KM 0.000 TO KM 95.825-98.305.xls"]
@@ -212,6 +235,7 @@ coord_sp4 = ["no_file.xls", "points RR 10.xls", "points RR 30.xls",
 			"R4 Final 45.000 TO 47.100  COORDINATES.xls", "47.100 TO 67.500 COORDINATES.xls", "RRPOINTS67.xls",
 			"82.500 to 112.00.xls", "RRPOINTS112.xls", "RRPOINTS.xls",
 			"V4 Final 142.000 TO 151.837 COORDINATES.xls", "0.000 to 27.660.xls", "no_file.xls"]
+coord_sp5 = ["VILLAGE BOUNDRY CO-ORDINATES.xlsx"]
 
 projects.each_with_index do |p, index|
   project = Project.find_or_create_by(name: p, description: p)
