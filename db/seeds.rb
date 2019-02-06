@@ -117,6 +117,7 @@ def import_village(sp, row, f1, f2, f3)
 
   vm.attachments.create(attach_type: "Digitised Copy", attachment: f1) if f1
   vm.attachments.create(attach_type: "Pdf Copy", attachment: f2) if f2
+  vm.attachments.create(attach_type: "Scanned Copy", attachment: f3) if f3
 end
 
 def import_village_maps(sp, row, f1, f2, f3)
@@ -126,6 +127,7 @@ def import_village_maps(sp, row, f1, f2, f3)
 
   vm.attachments.create(attach_type: "Digitised Copy", attachment: f1) if f1
   vm.attachments.create(attach_type: "Pdf Copy", attachment: f2) if f2
+  vm.attachments.create(attach_type: "Scanned Copy", attachment: f3) if f3
 end
 
 def import_custom_menu(sp, row, f)
@@ -135,6 +137,10 @@ def import_custom_menu(sp, row, f)
 
     cm.attachments.create(attachment: f) if f
   end
+end
+
+def import_project_images(sp, f)
+  sp.attachments.create(attach_type: "Images", attachment: f) if f
 end
 
 def file_check(path, file_name)
@@ -194,6 +200,9 @@ def import_data(sub_proj, folder)
         import_village_maps(sub_proj, row, f1, f2, f3)
       when "custom menu"
         import_custom_menu(sub_proj, row, f3)
+      when "images"
+        f0 = file_check(path, row[0]) if row[0].present?
+        import_project_images(sub_proj, f0)
     end
   end
 end
@@ -248,7 +257,6 @@ projects.each_with_index do |p, index|
   project.save!
   if File.exist?(@data_url + "#{project.folder_name}")
     path = @data_url + "#{project.folder_name}"
-    import_project_data(project, path)
     import_project_data(project, path)
   else
     puts "#{p} folder not exist"
