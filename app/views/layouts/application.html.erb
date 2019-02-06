@@ -144,6 +144,14 @@
               </div>
             <% end %> 
           </div>
+        <% elsif @sub_project and @sub_project.image_files.present? %>
+          <div id="owl-demo" class="owl-carousel owl-theme">
+            <% @sub_project.image_files.each do |file| %>
+              <div class="item"> 
+                <a href="#" class="pop"> <%= image_tag(file.attachment.url, height:"268", big_src:"#{file.attachment.url}")  %> </a>
+              </div>
+            <% end %> 
+          </div>
         <% else %>
           <embed src="<%= header_flash_file %>" width="1140" height="268"/>
         <% end %>
