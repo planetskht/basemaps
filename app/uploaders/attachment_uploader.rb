@@ -4,7 +4,33 @@ class AttachmentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
+
+# https://gist.github.com/ahamid/995663
+  # IMAGE_EXTENSIONS = %w(jpg jpeg gif png tif)
+
+  # create a new "process_extensions" method.  It is like "process", except
+  # it takes an array of extensions as the first parameter, and registers
+  # a trampoline method which checks the extension before invocation
+  # def self.process_extensions(*args)
+  #   extensions = args.shift
+  #   args.each do |arg|
+  #     if arg.is_a?(Hash)
+  #       arg.each do |method, args|
+  #         processors.push([:process_trampoline, [extensions, method, args]])
+  #       end
+  #     else
+  #       processors.push([:process_trampoline, [extensions, arg, []]])
+  #     end
+  #   end
+  # end
+
+  # our trampoline method which only performs processing if the extension matches
+  # def process_trampoline(extensions, method, args)
+  #   extension = File.extname(original_filename).downcase
+  #   extension = extension[1..-1] if extension[0,1] == '.'
+  #   self.ethod, *args) if extensions.include?(extension)
+  # end
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -36,14 +62,22 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process :resize_to_fit => [50, 50]
-  # end
+  version :thumb, :if => :image? do
+    process :resize_to_fit => [50, 50]
+  end
+
+  version :medium, :if => :image? do
+    process :resize_to_fit => [250, 250]
+  end
+
+  version :large, :if => :image? do
+    process :resize_to_fit => [600, 600]
+  end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   # def extension_white_list
-  #   %w(jpg jpeg gif png)
+  #   %w(jpg jpeg gif png tif)
   # end
 
   # Override the filename of the uploaded files:
@@ -51,5 +85,9 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+protected
+  def image?(new_file)
+    %w(jpg jpeg gif png tif JPG JPEG GIF PNG TIF).include?(new_file.extension.to_s)
+  end
 
 end

@@ -41,6 +41,7 @@ gem 'roo-xls'
 gem 'rambling-slider-rails'
 gem 'owlcarousel-rails'
 gem "paperclip", "~> 4.3.6"
+gem "mini_magick"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
