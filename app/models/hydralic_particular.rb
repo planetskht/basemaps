@@ -6,10 +6,10 @@ class HydralicParticular < ActiveRecord::Base
   validates_presence_of :title
 
   def self.canals
-  	where(:hydralic_type => 'Canal')
+  	where(:hydralic_type => 'Canal').order('title asc')
   end
 
   def self.structures
-  	where(:hydralic_type => 'Structure')
+  	where(:hydralic_type => 'Structure').order('title asc')
   end
 end

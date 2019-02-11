@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :village_maps
       resources :site_maps
       resources :custom_menus
+      resources :attachments
     end
   end
   devise_for :users

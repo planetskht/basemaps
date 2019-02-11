@@ -6,11 +6,11 @@ class VillageMap < ActiveRecord::Base
   validates_presence_of :village_name
 
   def self.site_maps
-  	where(:map_type => 'Site Map')
+  	where(:map_type => 'Site Map').order('title asc')
   end
 
   def self.normal_maps
-  	where(:map_type => 'Village Map')
+  	where(:map_type => 'Village Map').order('title asc')
   end
 
 end

@@ -37,7 +37,7 @@ module ApplicationHelper
       when "Scanned Copy"
         "<a class='download' href='#{href}'> <i class='fa fa-file-image-o'></i> #{attach.attach_type} </a>"
       when "Hp Copy" 
-        "<a class='download' href='#{href}'> <i class='fa fa-file-excel-o'></i> #{attach.attach_type} </a>"
+        "<a class='download' href='#{href}'> <i class='fa fa-file-excel-o'></i> H.P's Copy </a>"
       when "Pdf Copy" 
         "<a class='download' href='#{href}'> <i class='fa fa-file-pdf-o'></i> #{attach.attach_type} </a>"  
       when "Excel Sheet" 

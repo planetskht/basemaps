@@ -6,7 +6,7 @@ class BenchMarksController < ApplicationController
   # GET /bench_marks
   # GET /bench_marks.json
   def index
-    @bench_marks = @sub_project.bench_marks
+    @bench_marks = @sub_project.bench_marks.order('title asc')
   end
 
   # GET /bench_marks/1

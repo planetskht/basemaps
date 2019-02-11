@@ -6,7 +6,7 @@ class StructureDrawingsController < ApplicationController
   # GET /structure_drawings
   # GET /structure_drawings.json
   def index
-    @structure_drawings = @sub_project.structure_drawings
+    @structure_drawings = @sub_project.structure_drawings.order('title asc')
   end
 
   # GET /structure_drawings/1

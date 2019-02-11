@@ -140,7 +140,7 @@
           <div id="owl-demo" class="owl-carousel owl-theme">
             <% @project.image_files.each do |file| %>
               <div class="item"> 
-                <a href="#" class="pop"> <%= image_tag(file.attachment.url, height:"268", big_src:"#{file.attachment.url}")  %> </a>
+                <a href="#" class="pop"> <%= image_tag(file.attachment.url(:medium), height:"268", big_src:"#{file.attachment.url(:large)}")  %> </a>
               </div>
             <% end %> 
           </div>
