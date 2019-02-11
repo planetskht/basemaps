@@ -16,7 +16,7 @@ def import_coordinates(sp, xls)
     (4..spreadsheet.last_row).each do |i|
     	row = spreadsheet.row(i)
       # only for HNSS-Phase-1
-      if sp.folder_name == "HNSS-Phase-1" 
+      if sp.folder_name == "HNSS-Phase-111" 
         row = import_hnss_p1(row)
       else
         begin
@@ -244,7 +244,7 @@ coord_sp4 = ["no_file.xls", "points RR 10.xls", "points RR 30.xls",
 			"R4 Final 45.000 TO 47.100  COORDINATES.xls", "47.100 TO 67.500 COORDINATES.xls", "RRPOINTS67.xls",
 			"82.500 to 112.00.xls", "RRPOINTS112.xls", "RRPOINTS.xls",
 			"V4 Final 142.000 TO 151.837 COORDINATES.xls", "0.000 to 27.660.xls", "no_file.xls"]
-coord_sp5 = ["VILLAGE BOUNDRY CO-ORDINATES.xlsx"]
+coord_sp5 = ["HNSS Plase 1 Co-ordinates.xlsx"]
 
 if ENV["seed_project_number"].to_i > 0
   projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]
