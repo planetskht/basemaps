@@ -87,7 +87,7 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # end
 protected
   def image?(new_file)
-    %w(jpg jpeg gif png tif JPG JPEG GIF PNG TIF).include?(new_file.extension.to_s)
+    %w(jpg jpeg gif png JPG JPEG GIF PNG).include?(new_file.extension.to_s) && model.attach_type == "Images"
   end
 
 end
