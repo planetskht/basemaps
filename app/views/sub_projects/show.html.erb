@@ -2,7 +2,7 @@
   <!-- Default panel contents -->
   <div class="panel-heading">
     <div style="display: inline">
-      <h3><%= @sub_project.name%>
+      <h3>Basemaps under <%= @sub_project.name%>
       <span class="right">
         <% if current_user && current_user.role!="Guest"%>
           <%= link_to edit_project_sub_project_path(@project,@sub_project) do  %>

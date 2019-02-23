@@ -10,7 +10,7 @@ class VillageMap < ActiveRecord::Base
   end
 
   def self.normal_maps
-  	where(:map_type => 'Village Map').order('title asc')
+  	where(:map_type => 'Village Map').order('created_at asc')
   end
 
 end

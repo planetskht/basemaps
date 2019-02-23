@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Basemaps under TELUGU GANGA PROJECT  - To Manage Assets(Records)" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Basemaps under WATER PROJECT  - To Manage Assets(Records)" %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application", :media => "all" %>
@@ -38,8 +38,15 @@
   </head>
   <body style="background-color:#8b8989; display: inline;">
     <div class="container rounded_corners" style="background-color:white;width:1200px">
-      <div class="container" style="margin: -20px 0 0 0;">
-        <a href="<%= root_path %>"><img src="<%= asset_path('top.png') %>" ></a>
+
+      <div class="container rounded_corners navbar-default navbar-static-top" style="background-color:white;">
+        <div>
+          <h1 style="color: #00A1E8;font-weight: bold;font-size: 50px;margin-top: 10px;">BASEMAPS</h1>
+        </div>
+        <div style="padding-bottom: 5px;">
+          <span><h3 style="color: #F1042F;font-size: 27px;margin-top: 0px;">Water Resources Department</h3></span>
+          <span><h3 style="color: #2A2A29;font-size: 14px;margin-top: -30px;margin-left: 366px;">To Manage Assets(Records)</h3></span>
+        </div>
       </div>
 
       <div class="container rounded_corners navbar-default navbar-static-top" style="background-color:#5cacee;">
@@ -70,12 +77,12 @@
               <li class="dropdown main_dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">BaseMap <i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-menu dropdown-mainmenu">
-                  <li><a href="<%= project_sub_project_site_maps_path(@project, @sub_project) %>">Site Map Per KM Wise</a></li>
+                  <li><a href="<%= project_sub_project_site_maps_path(@project, @sub_project) %>">Base Map Per KM Wise</a></li>
                   <% if @sub_project.village_maps.normal_maps.count > 0 %>
                     <li><%= link_to "Village Maps", project_sub_project_village_maps_path(@project, @sub_project, :map_type=> "Village Map") %>
                   <% end %>
                   <% if @sub_project.village_maps.site_maps.count > 0 %>
-                    <li><%= link_to "Base Cum Site Map Village Wise", project_sub_project_village_maps_path(@project, @sub_project, :map_type=> "Site Map") %>
+                    <li><%= link_to "Base Map Village Wise & KM Wise", project_sub_project_village_maps_path(@project, @sub_project, :map_type=> "Site Map") %>
                   <% end %>
                   <li><%= link_to "Global Coordinates With Satilite View", project_sub_project_coordinates_path(@project, @sub_project) %> 
                   <% @sub_project.custom_menus.all.group_by(&:menu_name).each_pair do |menu_name, menu|%>
@@ -115,8 +122,14 @@
                       </li> -->
                 </ul>
               </li>
-              <li class="dropdown main_dropdown"><%= link_to "Structure Drawings", project_sub_project_structure_drawings_path(@project, @sub_project) %></li>
 
+              <li class="dropdown main_dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Structure Drawings<i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu dropdown-mainmenu">
+                  <li> <%= link_to "Structure Drawings", project_sub_project_structure_drawings_path(@project, @sub_project) %></li>
+                </ul>
+              </li>
+              
               <li class="dropdown main_dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hydralic Particulars<i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-menu dropdown-mainmenu">
