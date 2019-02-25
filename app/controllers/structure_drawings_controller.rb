@@ -6,7 +6,11 @@ class StructureDrawingsController < ApplicationController
   # GET /structure_drawings
   # GET /structure_drawings.json
   def index
-    @structure_drawings = @sub_project.structure_drawings.order('title asc')
+    if params[:structure_type].present? && params[:structure_type] == "Photos"
+      @structure_drawings = @sub_project.structure_drawings.photos
+    else
+      @structure_drawings = @sub_project.structure_drawings.drawings
+    end
   end
 
   # GET /structure_drawings/1

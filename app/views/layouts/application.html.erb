@@ -45,7 +45,7 @@
         </div>
         <div style="padding-bottom: 5px;">
           <span><h3 style="color: #F1042F;font-size: 27px;margin-top: 0px;">Water Resources Department</h3></span>
-          <span><h3 style="color: #2A2A29;font-size: 14px;margin-top: -30px;margin-left: 366px;">To Manage Assets(Records)</h3></span>
+          <!-- <span><h3 style="color: #2A2A29;font-size: 14px;margin-top: -30px;margin-left: 366px;">To Manage Assets(Records)</h3></span> -->
         </div>
       </div>
 
@@ -127,6 +127,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Structure Drawings<i class="fa fa-caret-down"></i></a>
                 <ul class="dropdown-menu dropdown-mainmenu">
                   <li> <%= link_to "Structure Drawings", project_sub_project_structure_drawings_path(@project, @sub_project) %></li>
+                  <li><%= link_to "Structure Photos", project_sub_project_structure_drawings_path(@project, @sub_project, :structure_type=> "Photos")  %></li>
                 </ul>
               </li>
               

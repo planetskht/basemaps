@@ -110,6 +110,13 @@ def import_structures(sp, row, f1, f2, f3, f4)
   end
 end
 
+def import_structure_photos(sp, row, f1)
+  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: "Photos", structure_label: nil)
+  sd.save!
+
+  sd.attachments.create(attach_type: "Photo Copy", attachment: f1) if f1
+end
+
 def import_village(sp, row, f1, f2, f3)
   vm = sp.village_maps.find_or_create_by(village_name: row[0], map_type: "Site Map")
   vm.title = row[0]
@@ -194,6 +201,8 @@ def import_data(sub_proj, folder)
         import_kmwise(sub_proj, row, f1, f2, f3)
       when "structures"
         import_structures(sub_proj, row, f1, f2, f3, f4)
+      when "structure photos"
+        import_structure_photos(sub_proj, row, f1)
       when "village"
         import_village(sub_proj, row, f1, f2, f3)
       when "village maps"

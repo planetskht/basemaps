@@ -5,5 +5,11 @@ class StructureDrawing < ActiveRecord::Base
   ATTACH_TYPES = ["Digitised Copy", "Photo Copy", "Scanned Copy", "Hp Copy"]
   validates_presence_of :title
 
+  def self.drawings
+  	where(:structure_type => nil).order('title asc')
+  end
 
+  def self.photos
+  	where(:structure_type => 'Photos').order('title asc')
+  end
 end
