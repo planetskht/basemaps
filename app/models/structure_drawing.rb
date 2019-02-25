@@ -10,6 +10,6 @@ class StructureDrawing < ActiveRecord::Base
   end
 
   def self.photos
-  	where(:structure_type => 'Photos').order('title asc')
+  	where(:structure_type => 'Photos').order('created_at asc')
   end
 end
