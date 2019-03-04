@@ -29,7 +29,11 @@ def import_coordinates(sp, xls)
           row[0] = row[0].to_s
         end
       end
-    	sp.coordinates.create(title: row[0], east_utm: row[1], north_utm: row[2], lattitude: row[3], longitude: row[4], description: row[5], )
+      if row[0].to_s == "new xls"
+    	  sp.coordinates.create(title: "header row", description: row[1])
+      else
+        sp.coordinates.create(title: row[0], east_utm: row[1], north_utm: row[2], lattitude: row[3], longitude: row[4], description: row[5])
+      end  
     end
   else
     puts "#{xls} file not exist"

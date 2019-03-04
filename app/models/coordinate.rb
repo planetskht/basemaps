@@ -7,6 +7,10 @@ class Coordinate < ActiveRecord::Base
     # "http://maps.google.com/?q=#{self.lattitude},#{self.longitude}"
   end
 
+  def header_class(ind)
+    return "coordinate_#{ind}"
+  end
+
   def self.import(file, sub_project)
     spreadsheet = open_spreadsheet(file)
     header = spreadsheet.row(1)

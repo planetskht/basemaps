@@ -32,6 +32,7 @@
         <div class="clear">
       </div>
     <% end %>
+    <% ind = 1 %>
     <table class="table table-bordered">
       <thead>
       <tr>
@@ -49,29 +50,37 @@
       <tbody>
       <% @coordinates.each do |coordinate| %>
         <tr>
-          <td><%= coordinate.title %></td>
-          <td><%= coordinate.east_utm %></td>
-          <td><%= coordinate.north_utm %></td>
-          <td><%= coordinate.lattitude %></td>
-          <td><%= coordinate.longitude %></td>
-          <td><%= coordinate.description %></td>
-          <td>
-            <%= link_to coordinate.satelite_view_url, :target => "_blank" do %>
-              <i class="fa fa-globe"></i>Satellite View
-            <% end %>
-          </td>
-          <td>
-            <% if current_user && current_user.role != "Guest"%>
-              <%= link_to edit_project_sub_project_coordinate_path(@project, @sub_project, coordinate) do  %>
-                  <i class="fa fa-pencil-square-o"></i>
+          <% if coordinate.title == "header row" %>
+            <td id=<%= coordinate.header_class(ind) %> colspan="7"><b><%= coordinate.description %></b></td>
+            <td><%= link_to "Top", project_sub_project_coordinates_path(@project, @sub_project) %></td>
+            <% ind = ind + 1 %>
+          <% else %>
+            <td><%= coordinate.title %></td>
+            <td><%= coordinate.east_utm %></td>
+            <td><%= coordinate.north_utm %></td>
+            <td><%= coordinate.lattitude %></td>
+            <td><%= coordinate.longitude %></td>
+            <td><%= coordinate.description %></td>
+            <td>
+              <% if coordinate.lattitude && coordinate.longitude %>
+                <%= link_to coordinate.satelite_view_url, :target => "_blank" do %>
+                  <i class="fa fa-globe"></i>Satellite View
+                <% end %>
               <% end %>
-            <% end %>  
-            <% if current_user && current_user.role == "Admin"%> 
-              <%= link_to project_sub_project_coordinate_path(@project, @sub_project, coordinate), data: {confirm: "Are you sure you want to delete?"}, method: :delete do  %>
-                <i class="fa fa-trash"></i>
-              <% end %>
-            <% end %>  
-          </td>
+            </td>
+            <td>
+              <% if current_user && current_user.role != "Guest"%>
+                <%= link_to edit_project_sub_project_coordinate_path(@project, @sub_project, coordinate) do  %>
+                    <i class="fa fa-pencil-square-o"></i>
+                <% end %>
+              <% end %>  
+              <% if current_user && current_user.role == "Admin"%> 
+                <%= link_to project_sub_project_coordinate_path(@project, @sub_project, coordinate), data: {confirm: "Are you sure you want to delete?"}, method: :delete do  %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
+              <% end %>  
+            </td>
+          <% end %>
         </tr>
       <% end %>
       </tbody>

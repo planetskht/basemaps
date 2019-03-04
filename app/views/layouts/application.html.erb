@@ -84,7 +84,19 @@
                   <% if @sub_project.village_maps.site_maps.count > 0 %>
                     <li><%= link_to "Base Map Village Wise & KM Wise", project_sub_project_village_maps_path(@project, @sub_project, :map_type=> "Site Map") %>
                   <% end %>
-                  <li><%= link_to "Global Coordinates With Satilite View", project_sub_project_coordinates_path(@project, @sub_project) %> 
+                  <% if @sub_project.name == "HNSS Phase 1" %>
+                    <li class="dropdown-submenu">
+                      <a href="#" onclick="return false;">Global Coordinates With Satilite View</a>
+                      <ul class="dropdown-menu">
+                      <% ["Structure", "Canal", "Jeedipalli Reservoir BUND", "Jeedipalli Reservoir FLR", "Perur Branch Canal", "Village Boundary"].each_with_index  do |mname, index| %>
+                        <li><%= link_to mname+" Co-ordinates", "#{project_sub_project_coordinates_path(@project, @sub_project)}#coordinate_#{index+1}" %>
+                      <% end %>
+                      </ul>
+                    </li>
+                  <% else %>
+                    <li><%= link_to "Global Coordinates With Satilite View", project_sub_project_coordinates_path(@project, @sub_project)  %>
+                  <% end %>
+
                   <% @sub_project.custom_menus.all.group_by(&:menu_name).each_pair do |menu_name, menu|%>
                     <li class="dropdown-submenu">
                       <a href="#"><%= menu_name %></a>
