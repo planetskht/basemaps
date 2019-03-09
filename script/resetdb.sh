@@ -2,6 +2,8 @@
 
 git pull
 
+sh script/pull_data.sh
+
 echo "Stop unicorn and nginx Server"
 sudo systemctl stop nginx
 sudo systemctl stop unicorn
