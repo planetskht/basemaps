@@ -91,6 +91,14 @@ def import_hydraulic(sp, row, f1, f2, f3, f4)
   hp.attachments.create(attach_type: "Word File", attachment: f4) if f4
 end
 
+def import_hydraulic_approved(sp, row, f1, f2)
+  hp = sp.hydralic_particulars.find_or_create_by(title: row[0], hydralic_type: "Approved")
+  hp.save!
+
+  hp.attachments.create(attach_type: "Scanned Copy", attachment: f1) if f1
+  hp.attachments.create(attach_type: "Hp Copy", attachment: f2) if f2
+end
+
 def import_kmwise(sp, row, f1, f2, f3)
   sm = sp.site_maps.find_or_create_by(title: row[0])
   sm.save!
@@ -211,6 +219,8 @@ def import_data(sub_proj, folder)
         import_village(sub_proj, row, f1, f2, f3)
       when "village maps"
         import_village_maps(sub_proj, row, f1, f2, f3)
+      when "hydraulic approved"
+        import_hydraulic_approved(sub_proj, row, f1, f2)
       when "custom menu"
         import_custom_menu(sub_proj, row, f3)
       when "images"

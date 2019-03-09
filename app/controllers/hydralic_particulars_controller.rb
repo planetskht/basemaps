@@ -9,6 +9,8 @@ class HydralicParticularsController < ApplicationController
   def index
     if params[:hydralic_type].present? && params[:hydralic_type] == "Structure"
       @hydralic_particulars = @sub_project.hydralic_particulars.structures
+    elsif params[:hydralic_type].present? && params[:hydralic_type] == "Approved"
+      @hydralic_particulars = @sub_project.hydralic_particulars.approved
     else
       @hydralic_particulars = @sub_project.hydralic_particulars.canals
     end

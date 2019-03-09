@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
-# echo "Stop Apache Server"
-# sudo service httpd stop
+
+git pull
+
+echo "Stop unicorn and nginx Server"
+sudo systemctl stop nginx
+sudo systemctl stop unicorn
 
 rm -rf public/uploads/attachment
 echo "db:drop.."
@@ -12,5 +16,6 @@ rake db:migrate
 echo "db:seed..."
 rake db:seed
 
-# echo "Restart Apache Server"
-# sudo service httpd restart
+echo "Start unicorn and nginx Server"
+sudo systemctl start nginx
+sudo systemctl start unicorn
