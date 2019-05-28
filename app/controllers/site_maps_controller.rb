@@ -6,7 +6,7 @@ class SiteMapsController < ApplicationController
   # GET /site_maps
   # GET /site_maps.json
   def index
-    @site_maps = @sub_project.site_maps.order('title asc')
+    @site_maps = @sub_project.site_maps.order('created_at asc')
   end
 
   # GET /site_maps/1
