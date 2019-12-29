@@ -5,6 +5,7 @@ class CreateSiteMaps < ActiveRecord::Migration
       t.text :description
       t.string :from_km
       t.string :to_km
+      t.string :group_type
       t.references :sub_project, index: true, foreign_key: true
       t.timestamps null: false
     end

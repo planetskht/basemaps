@@ -91,16 +91,17 @@ def import_hydraulic(sp, row, f1, f2, f3, f4)
   hp.attachments.create(attach_type: "Word File", attachment: f4) if f4
 end
 
-def import_hydraulic_approved(sp, row, f1, f2)
+def import_hydraulic_approved(sp, row, f1, f2, f3)
   hp = sp.hydralic_particulars.find_or_create_by(title: row[0], hydralic_type: "Approved")
   hp.save!
 
   hp.attachments.create(attach_type: "Scanned Copy", attachment: f1) if f1
   hp.attachments.create(attach_type: "Hp Copy", attachment: f2) if f2
+  hp.attachments.create(attach_type: "Pdf Copy", attachment: f3) if f3
 end
 
-def import_kmwise(sp, row, f1, f2, f3)
-  sm = sp.site_maps.find_or_create_by(title: row[0])
+def import_kmwise(sp, row, f1, f2, f3, type)
+  sm = sp.site_maps.find_or_create_by(title: row[0], group_type: type || nil)
   sm.save!
 
   sm.attachments.create(attach_type: "Digitised Copy", attachment: f1) if f1
@@ -122,8 +123,19 @@ def import_structures(sp, row, f1, f2, f3, f4)
   end
 end
 
+def import_structures_hps(sp, row, f1, f2, f3, f4, type)
+  structure_label = row[5].present? ? row[5] : nil
+  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: "structure_hps", structure_label: structure_label, group_type: type || nil)
+  sd.save!
+
+  sd.attachments.create(attach_type: "Digitised Copy", attachment: f1) if f1
+  sd.attachments.create(attach_type: "Photo Copy", attachment: f2) if f2
+  sd.attachments.create(attach_type: "Scanned Copy", attachment: f3) if f3
+  sd.attachments.create(attach_type: "Hp Copy", attachment: f4) if f4
+end
+
 def import_structure_photos(sp, row, f1)
-  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: "Photos", structure_label: nil)
+  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: "Photos", structure_label: nil, group_type: row[2] || nil)
   sd.save!
 
   sd.attachments.create(attach_type: "Photo Copy", attachment: f1) if f1
@@ -210,9 +222,11 @@ def import_data(sub_proj, folder)
       when "hydraulic"
         import_hydraulic(sub_proj, row, f1, f2, f3, f4)
       when "kmwise"
-        import_kmwise(sub_proj, row, f1, f2, f3)
+        import_kmwise(sub_proj, row, f1, f2, f3, row[4])
       when "structures"
         import_structures(sub_proj, row, f1, f2, f3, f4)
+      when "structures hps"
+        import_structures_hps(sub_proj, row, f1, f2, f3, f4, row[5])
       when "structure photos"
         import_structure_photos(sub_proj, row, f1)
       when "village"
@@ -220,7 +234,7 @@ def import_data(sub_proj, folder)
       when "village maps"
         import_village_maps(sub_proj, row, f1, f2, f3)
       when "hydraulic approved"
-        import_hydraulic_approved(sub_proj, row, f1, f2)
+        import_hydraulic_approved(sub_proj, row, f1, f2, f3)
       when "custom menu"
         import_custom_menu(sub_proj, row, f3)
       when "images"
@@ -247,7 +261,7 @@ sub_proj4 = ["SSG Canal Basemap from Km. 0.000 to Km. 5.435_10.000", "Basemap fr
 			"Basemap from Km 45.000 to Km 47.100", "Basemap from Km 47.100 to Km 67.500", "Basemap from Km 67.500 to Km 82.500",
 			"Basemap from Km 82.500 to Km 112.000", "Basemap from Km 112.000 to Km 120.800", "Basemap from Km 120.800 to Km 142.000",
 			"Basemap from Km 142.000 to Km 151.837", "7th Branch Canal Basemap from KM 0.000 TO KM 27.666", "7A AYACUT BASEMAP"]
-sub_proj5 = ["HNSS Phase 1"]
+sub_proj5 = ["HNSS Phase 1", "HNSS Phase 2"]
 
 # Flash file for sub projects
 flash_sp1 = ["120.800-142.swf", "120.800-142.swf", "TGP MAIN CANAL.swf"]
@@ -267,7 +281,7 @@ coord_sp4 = ["no_file.xls", "points RR 10.xls", "points RR 30.xls",
 			"R4 Final 45.000 TO 47.100  COORDINATES.xls", "47.100 TO 67.500 COORDINATES.xls", "RRPOINTS67.xls",
 			"82.500 to 112.00.xls", "RRPOINTS112.xls", "RRPOINTS.xls",
 			"V4 Final 142.000 TO 151.837 COORDINATES.xls", "0.000 to 27.660.xls", "no_file.xls"]
-coord_sp5 = ["HNSS Plase 1 Co-ordinates.xlsx"]
+coord_sp5 = ["HNSS Plase 1 Co-ordinates.xlsx", "HNSS Plase 2 Co-ordinates.xlsx"]
 
 if ENV["seed_project_number"].to_i > 0
   projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]

@@ -3,8 +3,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: basemaps
-  password: basemaps
+  username: postgres
 
 development:
   <<: *default

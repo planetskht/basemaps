@@ -2,7 +2,7 @@
   <!-- Default panel contents -->
   <div class="panel-heading">
     <div style="display: inline">
-      <span class="h3">Base Map Per KM Wise of <%= @sub_project.name %>
+      <span class="h3">Base Map Per KM Wise of <%= @sub_project.name %> <%= params[:group_type] %>
       </span>
       <span class="right">
         <% if current_user && current_user.role != "Guest"%>

@@ -30,6 +30,9 @@ cd HNSS-Phase-1
 git pull
 cd ..
 
+cd HNSS-Phase-2
+git pull
+cd ..
 
 
 cd ..

@@ -6,7 +6,11 @@ class SiteMapsController < ApplicationController
   # GET /site_maps
   # GET /site_maps.json
   def index
-    @site_maps = @sub_project.site_maps.order('created_at asc')
+    if params[:group_type].present?
+      @site_maps = @sub_project.site_maps.where(:group_type => params[:group_type]).order('created_at asc')
+    else
+      @site_maps = @sub_project.site_maps.order('created_at asc')
+    end
   end
 
   # GET /site_maps/1

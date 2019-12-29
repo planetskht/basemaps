@@ -6,10 +6,18 @@ class StructureDrawingsController < ApplicationController
   # GET /structure_drawings
   # GET /structure_drawings.json
   def index
-    if params[:structure_type].present? && params[:structure_type] == "Photos"
-      @structure_drawings = @sub_project.structure_drawings.photos
+    if params[:group_type].present?
+      structures = @sub_project.structure_drawings.where(:group_type => params[:group_type])
     else
-      @structure_drawings = @sub_project.structure_drawings.drawings
+      structures = @sub_project.structure_drawings
+    end
+    
+    if params[:structure_type].present? && params[:structure_type] == "Photos"
+      @structure_drawings = structures.photos
+    elsif params[:structure_type].present? && params[:structure_type] == "structure_hps"
+      @structure_drawings = structures.structure_hps
+    else
+      @structure_drawings = structures.drawings
     end
   end
 

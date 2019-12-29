@@ -12,4 +12,8 @@ class StructureDrawing < ActiveRecord::Base
   def self.photos
   	where(:structure_type => 'Photos').order('created_at asc')
   end
+
+  def self.structure_hps
+    where(:structure_type => 'structure_hps').order('created_at asc')
+  end
 end

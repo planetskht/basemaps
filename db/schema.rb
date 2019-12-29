@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20170207155038) do
     t.text     "description"
     t.string   "from_km"
     t.string   "to_km"
+    t.string   "group_type"
     t.integer  "sub_project_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(version: 20170207155038) do
     t.text     "description"
     t.integer  "sub_project_id"
     t.string   "type"
+    t.string   "group_type"
     t.string   "structure_type"
     t.string   "structure_label"
     t.datetime "created_at",      null: false
