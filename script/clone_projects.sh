@@ -14,7 +14,7 @@ git clone git@github.com:planetskht/Kandaleru-Reservoir-Basemap.git
 
 git clone git@github.com:planetskht/HNSS-Phase-1.git
 
-git clone git@github.com:planetskht/HNSS-Phase-2.git
+#git clone git@github.com:planetskht/HNSS-Phase-2.git
 
 cd ..
 cd basemaps
