@@ -14,6 +14,6 @@ class StructureDrawing < ActiveRecord::Base
   end
 
   def self.structure_hps
-    where(:structure_type => 'structure_hps').order('created_at asc')
+    where(:structure_type => "Structure & HP's").order('created_at asc')
   end
 end

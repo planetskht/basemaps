@@ -125,7 +125,7 @@ end
 
 def import_structures_hps(sp, row, f1, f2, f3, f4, type)
   structure_label = row[5].present? ? row[5] : nil
-  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: "structure_hps", structure_label: structure_label, group_type: type || nil)
+  sd = sp.structure_drawings.find_or_create_by(title: row[0], structure_type: "Structure & HP's", structure_label: structure_label, group_type: type || nil)
   sd.save!
 
   sd.attachments.create(attach_type: "Digitised Copy", attachment: f1) if f1

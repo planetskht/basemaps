@@ -14,7 +14,7 @@ class StructureDrawingsController < ApplicationController
     
     if params[:structure_type].present? && params[:structure_type] == "Photos"
       @structure_drawings = structures.photos
-    elsif params[:structure_type].present? && params[:structure_type] == "structure_hps"
+    elsif params[:structure_type].present? && params[:structure_type] == "Structure & HP's"
       @structure_drawings = structures.structure_hps
     else
       @structure_drawings = structures.drawings

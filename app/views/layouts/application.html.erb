@@ -166,13 +166,13 @@
                   <% if @sub_project.structure_drawings.structure_hps.count > 0 %>
 
                     <% if @sub_project.structure_drawings.structure_hps.group_by(&:group_type).keys.count <= 0 %>
-                      <li> <%= link_to "Structure Drawings & HP's", project_sub_project_structure_drawings_path(@project, @sub_project, :structure_type => "structure_hps") %></li>
+                      <li> <%= link_to "Structure Drawings & HP's", project_sub_project_structure_drawings_path(@project, @sub_project, :structure_type => "Structure & HP's") %></li>
                     <% else %>
                       <li class="dropdown-submenu">
                         <a href="#" onclick="return false;">Structure Drawings & HP's</a>
                         <ul class="dropdown-menu">
                         <% @sub_project.structure_drawings.structure_hps.group_by(&:group_type).keys.each_with_index  do |mname, index| %>
-                          <li><%= link_to mname, project_sub_project_structure_drawings_path(@project, @sub_project, :structure_type => "structure_hps", :group_type => mname) %>
+                          <li><%= link_to mname, project_sub_project_structure_drawings_path(@project, @sub_project, :structure_type => "Structure & HP's", :group_type => mname) %>
                         <% end %>
                         </ul>
                       </li>
