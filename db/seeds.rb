@@ -287,6 +287,13 @@ if ENV["seed_project_number"].to_i > 0
   projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]
 end
 projects.each_with_index do |p, index|
+
+  puts "Active Projects..."
+  puts ENV["active_projects"]
+  if ENV["active_projects"].is_a? Array && !ENV["active_projects"][index]
+    next
+  end
+
   if ENV["seed_project_number"].to_i > 0
     index = ENV["seed_project_number"].to_i if ENV["seed_project_number"]
   end
