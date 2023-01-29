@@ -34,6 +34,10 @@ cd HNSS-Phase-2
 git pull
 cd ..
 
+cd Pulichinthala-Project
+git pull
+cd ..
+
 
 cd ..
 cd basemaps
