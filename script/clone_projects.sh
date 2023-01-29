@@ -16,5 +16,7 @@ git clone git@github.com:planetskht/HNSS-Phase-1.git
 
 git clone git@github.com:planetskht/HNSS-Phase-2.git
 
+git clone git@github.com:planetskht/Pulichinthala-Project.git
+
 cd ..
 cd basemaps
