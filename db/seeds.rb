@@ -6,7 +6,7 @@ guest = User.create_with(password: "test1234", password_confirmation: "test1234"
 
 
 @data_url = Rails.root + "../"+"basemaps_data/"
-@skipped_projects = [5]
+@skipped_projects = [4]
 
 def import_coordinates(sp, xls)
   file = @data_url + "#{sp.folder_name}/#{xls}"
