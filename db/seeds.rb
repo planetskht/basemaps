@@ -6,6 +6,7 @@ guest = User.create_with(password: "test1234", password_confirmation: "test1234"
 
 
 @data_url = Rails.root + "../"+"basemaps_data/"
+@skipped_projects = [5]
 
 def import_coordinates(sp, xls)
   file = @data_url + "#{sp.folder_name}/#{xls}"
@@ -291,6 +292,8 @@ if ENV["seed_project_number"].to_i > 0
   projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]
 end
 projects.each_with_index do |p, index|
+	    
+  if !@skipped_projects.include?(index)
 
   if ENV["seed_project_number"].to_i > 0
     index = ENV["seed_project_number"].to_i if ENV["seed_project_number"]
@@ -325,6 +328,8 @@ projects.each_with_index do |p, index|
     else
       puts "#{sp} folder not exist"
     end
+  end
+	    
   end
 end
 
