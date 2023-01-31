@@ -6,7 +6,7 @@ guest = User.create_with(password: "test1234", password_confirmation: "test1234"
 
 
 @data_url = Rails.root + "../"+"basemaps_data/"
-@skipped_projects = [4]
+@skipped_projects = []
 
 def import_coordinates(sp, xls)
   file = @data_url + "#{sp.folder_name}/#{xls}"
@@ -286,7 +286,7 @@ coord_sp4 = ["no_file.xls", "points RR 10.xls", "points RR 30.xls",
 			"82.500 to 112.00.xls", "RRPOINTS112.xls", "RRPOINTS.xls",
 			"V4 Final 142.000 TO 151.837 COORDINATES.xls", "0.000 to 27.660.xls", "no_file.xls"]
 coord_sp5 = ["HNSS Plase 1 Co-ordinates.xlsx", "HNSS Plase 2 Co-ordinates.xlsx"]
-coord_sp6 = ["PCP village Coordinates.xlsx", "PCP Coordinates.xlsx"]
+coord_sp6 = ["PCP village Coordinates.xlsx"]
 
 if ENV["seed_project_number"].to_i > 0
   projects = [projects[ENV["seed_project_number"].to_i]] if ENV["seed_project_number"]
