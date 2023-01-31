@@ -17,7 +17,7 @@ def import_coordinates(sp, xls)
     (4..spreadsheet.last_row).each do |i|
     	row = spreadsheet.row(i)
       # only for HNSS-Phase-1
-      if sp.folder_name == "HNSS-Phase-111" 
+      if sp.folder_name == "HNSS-Phase-1" 
         row = import_hnss_p1(row)
       else
         begin
@@ -263,7 +263,7 @@ sub_proj4 = ["SSG Canal Basemap from Km. 0.000 to Km. 5.435_10.000", "Basemap fr
 			"Basemap from Km 45.000 to Km 47.100", "Basemap from Km 47.100 to Km 67.500", "Basemap from Km 67.500 to Km 82.500",
 			"Basemap from Km 82.500 to Km 112.000", "Basemap from Km 112.000 to Km 120.800", "Basemap from Km 120.800 to Km 142.000",
 			"Basemap from Km 142.000 to Km 151.837", "7th Branch Canal Basemap from KM 0.000 TO KM 27.666", "7A AYACUT BASEMAP"]
-sub_proj5 = ["HNSS Phase 1", "HNSS Phase 3"]
+sub_proj5 = ["HNSS Phase 1", "HNSS Phase 2"]
 sub_proj6 = ["Pulichinthala Project"]
 
 # Flash file for sub projects
